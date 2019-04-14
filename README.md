@@ -6,15 +6,15 @@
 |email|string|nill: false, unique: true|
 |password|string|nill: false|
 ### Association
-- has_many :groups, through: :users_groups
+- has_many :groups, through: :user_groups
 - has_many :messages
-- has_many :users_groups
+- has_many :user_groups
 
-## users_groupsテーブル
+## user_groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|nill: false, foreign_key: true|
-|group_id|integer|nill: false, foreign_key: true|
+|user_id|references|nill: false, foreign_key: true|
+|group_id|references|nill: false, foreign_key: true|
 ### Association
 - belongs_to :user
 - belongs_to :group
@@ -22,17 +22,17 @@
 ## groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string(10)|nill: false| 
+|name|string|nill: false| 
 ### Association
-- has_many :users, through: :users_groups
-- has_many :comments
-- has_many :users_groups
+- has_many :users, through: :user_groups
+- has_many :messages
+- has_many :user_groups
 
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|nill: false, foreign_key: true|
-|group_id|integer|nill: false, foreign_key: true|
+|user_id|references|nill: false, foreign_key: true|
+|group_id|references|nill: false, foreign_key: true|
 |text|text||
 |image|string||
 ### Association
