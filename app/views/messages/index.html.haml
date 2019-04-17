@@ -1,0 +1,51 @@
+!!!
+%html
+%head
+  %link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css")/
+  %title
+  %body
+    .flash-box
+      %p flashtext
+    .wrapper
+      .wrapper-left
+        .header-left
+          %p.header-left__user-name current_user.name
+          %ul
+            %li
+              %a.fas.fa-cog(href="" )
+            %li
+              %a.fas.fa-edit(href="")
+        .grouplist
+          .group-wrapper
+            .group
+              %p.group__group-name groupname
+              %p.group__latestmessage latestmessage
+            .group
+              %p.group__group-name groupname
+              %p.group__latestmessage latestmessage
+      .wrapper-right
+        .header-right
+          .current-group
+            %p.currrent-group__title group title
+            %ul.member-list 
+              %li "メンバー"
+              %li.member-list__member メンバーA
+          %a.edit(href="#") Edit
+        .message-list
+          .message
+            %p.message-user test-user
+            %p.message-date 9999999999
+            %p.message-text こんにちは
+          .message
+            %p.message-user test-user
+            %p.message-date 9999999999
+            %p.message-text こんにちは
+    %p - yaml
+    %footer.footer
+      .form
+        %form.new-message
+          %input.textarea(placeholder="type a message" name="message" type="text")
+            %input.none#imagefile(name="file" type="file") 
+              %label.fontawesome(for="imagefile")
+                %i.fas.fa-image 
+          %input(class="send" type="submit" value="Send")
