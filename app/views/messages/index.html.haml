@@ -1,0 +1,44 @@
+.flash-box
+  %p flashtext
+.wrapper
+  .chat-side
+    .side-header
+      %p.side-header__user-name current_user.name
+      %ul.user-menu
+        %li.user-menu__edit-user
+          %a.fa.fa-cog(href="" )
+        %li.user-menu__new-group
+          %a.fa.fa-edit(href="")
+    .grouplist
+      .group
+        %p.group__group-name groupname
+        %p.group__latest-message latestmessage
+      .group
+        %p.group__group-name groupname
+        %p.group__latest-message latestmessage
+  .chat-main
+    .main-header
+      .current-group
+        %p.current-group__title group title
+        %ul.member-list 
+          %li "メンバー"
+          %li.member-list__member メンバーA
+      %a.edit(href="#") Edit
+    .message-list
+      .message
+        %p.message__user test-user
+        %p.message__date 9999999999
+        %p.message__text こんにちは
+      .message
+        %p.message__user test-user
+        %p.message__date 9999999999
+        %p.message__text こんにちは
+%p - yaml
+%footer.footer
+  .form
+    %form.new-message
+      %input.new-message__textarea(placeholder="type a message" name="message" type="text")
+        %input.none#imagefile(name="file" type="file") 
+          %label.image-label.fontawesome(for="imagefile")
+            %i.image-label__input.fa.fa-image
+      %input.new-message__submit-btn(class="send" type="submit" value="Send")
