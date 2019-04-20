@@ -1,38 +1,27 @@
 .flash-box
-  %p flashtext
-.wrapper
-  
+.wrapper  
+  = render "shared/side_bar"
   .chat-main
     .main-header
       .current-group
-        %p.current-group__title group title
+        %p.current-group__title
+          = @group.name
         %ul.member-list 
           %li "メンバー"
-          %li.member-list__member メンバーA
-      %a.edit(href="#") Edit
+          - @group.users.each do |user|
+            %li.member-list__member
+              = user.name
+      = link_to edit_group_path(@group) do
+        %p.edit Edit
     .message-list
       .message
         =render @messages
-      -#   %p.message__user test-user
-      -#   %p.message__date 9999999999
-      -#   %p.message__text こんにちは
-      -# .message
-      -#   %p.message__user test-user
-      -#   %p.message__date 9999999999
-      -#   %p.message__text こんにちは
--# %p - yaml
 %footer.footer
   .form
-    = form_for [@group,@message] do |f|
-      =f.text_field :content, class: "form__message", placeholder: "type a message"
+    = form_for [@group, @message] do |f|
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
       .form__mask
-        = f.label :image, class: "form__mask__image" do
-          =fa_icon "picture-o", class: "icon"
-          =f.file_field :image, class:"hidden"
-      = f.submit "Send", class: "form__submit"
-    %form.new-message
-      %input.new-message__textarea(placeholder="type a message" name="message" type="text")
-        %input.none#imagefile(name="file" type="file") 
-          %label.image-label.fontawesome(for="imagefile")
-            %i.image-label__input.fa.fa-image
-      %input.new-message__submit-btn(class="send" type="submit" value="Send")
+        = f.label :image, class: 'form__mask__image' do
+          = f.file_field :image, class: 'hidden'
+          = fa_icon 'picture-o', class: 'icon'
+      = f.submit 'Send', class: 'form__submit'
