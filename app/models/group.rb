@@ -12,12 +12,4 @@ class Group < ApplicationRecord
       "まだメッセージはありません"
     end
   end
-
-  # def show_last_name
-  #   if (last_name = messages.last).present?
-  #     last_message.content? ? last_message.content : last_message.name
-  #   else
-  #     ""
-  #   end
-  # end
 end
