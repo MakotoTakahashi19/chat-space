@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load',function(){
+  // Ajax messages
   function buildHTML(message){
     var html = `<div class="message">
                   <div class="upper-message" id="post-scroll">
@@ -23,7 +24,7 @@ $(document).on('turbolinks:load',function(){
   $("#new_message").on("submit", function(e){
     e.preventDefault();
     var formData = new FormData(this);
-    var url = $(this).attr("action")
+    var url = $(this).attr("action");
     $.ajax({
       url: url,
       type: 'POST',
