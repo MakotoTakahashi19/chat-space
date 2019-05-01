@@ -1,7 +1,9 @@
 $(document).on('turbolinks:load',function(){
-  // Ajax messages
+  $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");   
+
+  // Ajax Send message
   function buildHTML(message){
-    var html = `<div class="message">
+    var html = `<div class="message" data-id=${ message.id }>
                   <div class="upper-message" id="post-scroll">
                     <div class="message__user">
                       ${ message.user_name }
@@ -43,4 +45,26 @@ $(document).on('turbolinks:load',function(){
       alert('文字もしくは画像を送信してください');
     })
   });
+
+  // Ajax Automatic updating messages
+  var reloadMessages = function(){
+    last_message_id = $(".message:last").data('id');
+    $.ajax({
+      url: '/groups/:group_id/api/messages',
+      type: 'GET',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages){
+      $.each(messages, function(i, message){
+        var html = buildHTML(message);
+        $('.messages').append(html);
+        $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");   
+      });
+    })
+    .fail(function(){
+      alert("自動更新に失敗しました");
+    });
+  };
+  setInterval(reloadMessages, 5000);
 });
