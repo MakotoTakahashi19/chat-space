@@ -1,4 +1,6 @@
 $(document).on('turbolinks:load',function(){
+  $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");   
+
   // Ajax Send message
   function buildHTML(message){
     var html = `<div class="message" data-id=${ message.id }>
@@ -46,7 +48,8 @@ $(document).on('turbolinks:load',function(){
 
   // Ajax Automatic updating messages
   var reloadMessages = function(){
-    last_message_id = $(".messages:last").data('id');
+    last_message_id = $(".message:last").data('id');
+    console.log(last_message_id);
     $.ajax({
       url: '/groups/:group_id/api/messages',
       type: 'GET',
@@ -54,11 +57,12 @@ $(document).on('turbolinks:load',function(){
       data: {id: last_message_id}
     })
     .done(function(messages){
-      var insertHTML = '';
-      $.each(function(){
-        insertHTML = buildHTML(message);
-        $('.messages').append(insertHTML);
+      console.log(messages);
+      $.each(messages, function(i, message){
+        var html = buildHTML(message);
+        $('.messages').append(html);
         $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");   
+
       });
       console.log("sucsess");
     })
