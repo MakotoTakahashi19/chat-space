@@ -70,6 +70,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem "rails-i18n"
 gem "pry-byebug"
+gem "fog-aws"
 
 group :production do
   gem 'unicorn', '5.4.1'
