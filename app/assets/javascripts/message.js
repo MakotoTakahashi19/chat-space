@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load',function(){
-  $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");   
+  $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");
 
   // Ajax Send message
   function buildHTML(message){
@@ -56,15 +56,39 @@ $(document).on('turbolinks:load',function(){
       data: {id: last_message_id}
     })
     .done(function(messages){
+      if(messages.length === 0 ) return;
       $.each(messages, function(i, message){
+          console.log(messages)
+          Push.create("新着メッセージあります", {
+            body: message.content,
+            icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR1mk13QVqdU71zEWecJCCC-__1Acvavh6TLPVyg006qWne0Hk',
+            timeout: 4000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+          });
         var html = buildHTML(message);
         $('.messages').append(html);
-        $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");   
+        $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, "fast");
       });
     })
     .fail(function(){
       alert("自動更新に失敗しました");
     });
   };
-  setInterval(reloadMessages, 5000);
+  setInterval(reloadMessages, 20000);
+
+  // push通知
+  Push.create("push", {
+    body: "Wellcom! ようこそ日本へ",
+    icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAe1CBlAd9saLw3_gLhm2F0pUi4K6y7RPqadvPqStRxTpRHDRO',
+    timeout: 4000,
+    onClick: function () {
+        window.focus();
+        this.close();
+    }
+  });
+
+
 });
